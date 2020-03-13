@@ -17,10 +17,9 @@ Add this repo as remote, then create a new branch for the new setup.
 
 ## Install dotfiles onto a new setup
 
-´´´
+```
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 echo ".dotfiles" >> .gitignore
 git clone --bare <git-repo-url> $HOME/.dotfiles
 config checkout
-
-´´´
+```
