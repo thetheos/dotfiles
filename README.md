@@ -11,7 +11,7 @@ To save the dotfiles of a new setup.
 ```
 git init --bare ~/.dotfiles
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-config config status.showUntrackedFiles no
+dotfiles config status.showUntrackedFiles no
 ```
 Add this repo as remote, then create a new branch for the new setup.
 
@@ -21,5 +21,5 @@ Add this repo as remote, then create a new branch for the new setup.
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 echo ".dotfiles" >> .gitignore
 git clone --bare <git-repo-url> $HOME/.dotfiles
-config checkout
+dotfiles checkout
 ```
