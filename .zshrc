@@ -100,3 +100,4 @@ source $ZSH/oh-my-zsh.sh
 
 alias nano="vim"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias vscode="code" #Alias for Visual Studio Code
