@@ -34,6 +34,9 @@ for_window [class="plasmashell"] floating enable
 # Don’t spawn an empty window for the Plasma Desktop
 for_window [title="Desktop — Plasma"] kill, floating enable, border none
 
+for_window [class="latte-dock"] floating enable
+
+for_window [class="lattedock"] floating enable
 # Don’t let notifications and non-interactive pop-up windows steal focus
 #no_focus [class="plasmashell" window_type="notification"]
 #no_focus [class="plasmashell" window_type="on_screen_display"]
@@ -68,7 +71,8 @@ bindsym $mod+Shift+a kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec "dmenu_run -b -q -i -h 27 -l 15 -w 450 -y 15 -x 15 -nf '#0099CC' -nb '#333366' -sb '#0066FF' -sf '#CCFFFF'  -p ''"
-bindsym $mod+d exec "rofi -show run"
+bindsym $mod+d exec "rofi -show combi -modi combi -combi-modi run,drun"
+bindsym $mod+Shift+d exec "~/.config/rofi/scripts"
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -128,12 +132,14 @@ bindsym $mod+q focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+bindsym $mod+n exec "~/.config/i3/scripts/i3-rename-workspace"
+
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "Main"
-set $ws2 "Media"
-set $ws3 "Social"
-set $ws4 "Mail"
+set $ws1 "1:Main"
+set $ws2 "2:Media"
+set $ws3 "3:Social"
+set $ws4 "4:Mail"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
@@ -142,26 +148,26 @@ set $ws9 "9"
 set $ws10 "10"
 
 # switch to workspace, I remove number before the variable declaration in order to put text in those variables
-bindsym $mod+ampersand workspace $ws1 
-bindsym $mod+eacute workspace $ws2 
-bindsym $mod+quotedbl workspace $ws3 
-bindsym $mod+apostrophe workspace $ws4
-bindsym $mod+parenleft workspace $ws5 
-bindsym $mod+minus workspace $ws6 
-bindsym $mod+egrave workspace $ws7 
-bindsym $mod+underscore workspace $ws8
-bindsym $mod+ccedilla workspace $ws9 
-bindsym $mod+agrave workspace $ws10                   
+bindsym $mod+ampersand workspace number $ws1 
+bindsym $mod+eacute workspace number $ws2
+bindsym $mod+quotedbl workspace number $ws3 
+bindsym $mod+apostrophe workspace number $ws4
+bindsym $mod+parenleft workspace number $ws5
+bindsym $mod+section workspace number $ws6
+bindsym $mod+egrave workspace number $ws7
+bindsym $mod+exclam workspace number $ws8
+bindsym $mod+ccedilla workspace number $ws9
+bindsym $mod+agrave workspace number $ws10                
 
 # move focused container to workspace
 bindsym $mod+Shift+ampersand move container to workspace $ws1
 bindsym $mod+Shift+eacute move container to workspace $ws2
 bindsym $mod+Shift+quotedbl move container to workspace $ws3
 bindsym $mod+Shift+apostrophe move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+minus move container to workspace $ws6
+bindsym $mod+Shift+parentleft move container to workspace $ws5
+bindsym $mod+Shift+section move container to workspace $ws6
 bindsym $mod+Shift+egrave move container to workspace $ws7
-bindsym $mod+Shift+underscore move container to workspace $ws8
+bindsym $mod+Shift+exclam move container to workspace $ws8
 bindsym $mod+Shift+ccedilla move container to workspace $ws9
 bindsym $mod+Shift+agrave move container to workspace $ws10
 
@@ -223,7 +229,10 @@ mode "Windows Manipulation" {
 # finds out, if available)
 # bar {
 #         status_command i3status
+#         workspace_buttons yes 
+#
 # }
+
 
 #Wallpaper Settings
 exec --no-startup-id nitrogen --restore
@@ -232,5 +241,5 @@ exec --no-startup-id nitrogen --restore
 exec_always --no-startup-id ~/.config/i3/i3-alternating-layout/alternating_layouts.py
 
 #Start composer
-exec --no-startup-id picom --config ~/.config/picom/picom.conf 
+exec --no-startup-id xcompmgr
 
