@@ -31,6 +31,10 @@ new_float normal
 # Don’t treat Plasma pop-ups as full-sized windows
 for_window [class="plasmashell"] floating enable
 
+for_window [class="reflector3.exe"] floating enable
+#Enable floating mode for Mathpix
+for_window [class="Mathpix Snipping Tool"] floating enable
+
 # Don’t spawn an empty window for the Plasma Desktop
 for_window [title="Desktop — Plasma"] kill, floating enable, border none
 
@@ -65,13 +69,14 @@ floating_modifier $mod
 ## Applications key bindings
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Shift+z exec google-chrome
+bindsym $mod+Shift+z exec opera
 # kill focused window
 bindsym $mod+Shift+a kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec "dmenu_run -b -q -i -h 27 -l 15 -w 450 -y 15 -x 15 -nf '#0099CC' -nb '#333366' -sb '#0066FF' -sf '#CCFFFF'  -p ''"
-bindsym $mod+d exec "rofi -show combi -modi combi -combi-modi run,drun"
+#bindsym $mod+d exec "rofi -show combi -modi combi -combi-modi run,drun"
+bindsym $mod+d exec "~/.config/rofi/launchers/text/launcher.sh"
 bindsym $mod+Shift+d exec "~/.config/rofi/scripts"
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -111,6 +116,9 @@ bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
+
+bindsym $mod+j fullscreen enable
+bindsym $mod+k fullscreen disable
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -164,7 +172,7 @@ bindsym $mod+Shift+ampersand move container to workspace $ws1
 bindsym $mod+Shift+eacute move container to workspace $ws2
 bindsym $mod+Shift+quotedbl move container to workspace $ws3
 bindsym $mod+Shift+apostrophe move container to workspace $ws4
-bindsym $mod+Shift+parentleft move container to workspace $ws5
+bindsym $mod+Shift+parenleft move container to workspace $ws5
 bindsym $mod+Shift+section move container to workspace $ws6
 bindsym $mod+Shift+egrave move container to workspace $ws7
 bindsym $mod+Shift+exclam move container to workspace $ws8
@@ -176,6 +184,9 @@ workspace $ws1 output HDMI-0
 workspace $ws2 output DVI-D-O
 workspace $ws3 output DVI-I-1
 
+# Switch to next workspace
+bindsym Control+Mod1+Left workspace prev_on_output
+bindsym Control+Mod1+Right workspace next_on_output
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
@@ -233,6 +244,8 @@ mode "Windows Manipulation" {
 #
 # }
 
+for_window [class="Ferdi"] move to workspace $ws3 
+#for_window [class="Spotify"] move to workspace $ws2
 
 #Wallpaper Settings
 exec --no-startup-id nitrogen --restore
@@ -241,5 +254,27 @@ exec --no-startup-id nitrogen --restore
 exec_always --no-startup-id ~/.config/i3/i3-alternating-layout/alternating_layouts.py
 
 #Start composer
-exec --no-startup-id xcompmgr
+exec --no-startup-id picom #xcompmgr
 
+set $exec_i3_groups exec --no-startup-id i3-workspace-groups
+
+# Switch active workspace group
+bindsym $mod+g exec --no-startup-id i3-switch-active-workspace-group
+
+# Assign workspace to a group
+bindsym $mod+Shift+g exec --no-startup-id i3-assign-workspace-to-group
+
+# Rename/renumber workspace. Uses Super+Alt+n
+bindsym Mod1+Mod4+n exec --no-startup-id i3-rename-workspace
+
+# Redshift
+exec --no-startup-id redshift
+
+# Colors
+client.focused          #4c7899 #536895 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+client.background       #ffffff

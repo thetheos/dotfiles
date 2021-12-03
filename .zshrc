@@ -1,14 +1,25 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/thetheos/.oh-my-zsh"
 
+# TERM
+export TERM=xterm-256color
+
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -68,7 +79,8 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git
+         zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -94,9 +106,48 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
+#
+
+export DEFAULT_USER=thetheos # Hide "user@hostname"
+
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias nano="nvim"
+alias ls="exa"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias copy="cp"
+alias vsim="/home/thetheos/intelFPGA_lite/20.1/modelsim_ase/linux/vsim"
+alias quartus="/home/thetheos/intelFPGA_lite/20.1/quartus/bin/quartus"
+# Nodejs
+VERSION=v12.18.3
+DISTRO=linux-x64
+export PATH=/usr/local/lib/nodejs/node-$VERSION-$DISTRO/bin:$PATH
+export PATH=$PATH:/home/thetheos/.local/bin
+export PATH=$PATH:/home/thetheos/intelFPGA_lite/20.1/modelsim_ase/linux/vsim
+#export PATH=$PATH:/home/thetheos/miniconda3/bin
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/thetheos/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/thetheos/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/thetheos/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/thetheos/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /home/thetheos/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
