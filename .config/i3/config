@@ -187,8 +187,13 @@ workspace $ws3 output DVI-I-1
 # Switch to next workspace
 bindsym Control+Mod1+Left workspace prev_on_output
 bindsym Control+Mod1+Right workspace next_on_output
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
+# Switch between fullscreen windows in the same workspace
+bindsym $mod+Control+Left fullscreen disable, focus left, fullscreen enable
+bindsym $mod+Control+Right fullscreen disable, focus right, fullscreen enable
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 #bindsym $mod+Shift+r restart
