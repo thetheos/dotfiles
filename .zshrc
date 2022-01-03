@@ -120,6 +120,8 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias copy="cp"
 alias vsim="/home/thetheos/intelFPGA_lite/20.1/modelsim_ase/linux/vsim"
 alias quartus="/home/thetheos/intelFPGA_lite/20.1/quartus/bin/quartus"
+alias cat="bat"
+alias ps="procs"
 # Nodejs
 VERSION=v12.18.3
 DISTRO=linux-x64
